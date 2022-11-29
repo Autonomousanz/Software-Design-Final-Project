@@ -34,7 +34,7 @@ class Ghost(Obstacles):
 		#image of the obstacle
 		img = (Image.open("images/ghost.png"))
 		#resize to fit
-		resized_image= img.resize((150, 105), Image.LANCZOS)
+		resized_image= img.resize((150, 105), Image.Resampling.LANCZOS)
 		#save the image in new folder
 		self.img = resized_image.save(self.dir + "downsize_ghost.png")
 		
@@ -49,7 +49,7 @@ class Castle1(Obstacles):
 	def __init__(self,x=650,y=670,name = 'Castle1'):
 		super().__init__(x,y,name)
 		img = (Image.open("images/castle1.png"))
-		resized_image= img.resize((200, 405), Image.LANCZOS)
+		resized_image= img.resize((200, 405), Image.Resampling.LANCZOS)
 		self.im1 = resized_image.save(self.dir + "downsize_castle1.png")
 
 	def get_obstacle(self):
@@ -61,7 +61,7 @@ class Castle2(Obstacles):
 	def __init__(self,x=650,y=670,name = 'Castle2'):
 		super().__init__(x,y,name)
 		img = (Image.open("images/castle2.png"))
-		resized_image= img.resize((200, 405), Image.LANCZOS)
+		resized_image= img.resize((200, 405), Image.Resampling.LANCZOS)
 		self.im1 = resized_image.save(self.dir + "downsize_castle2.png")
 
 	def get_obstacle(self):
@@ -73,7 +73,7 @@ class Tree(Obstacles):
 	def __init__(self,x=650,y=670,name = 'Tree'):
 		super().__init__(x,y,name)
 		img = (Image.open("images/tree.png"))
-		resized_image= img.resize((200, 405), Image.LANCZOS)
+		resized_image= img.resize((200, 405), Image.Resampling.LANCZOS)
 		self.im1 = resized_image.save(self.dir + "downsize_tree.png")
 
 	def get_obstacle(self):
@@ -86,7 +86,7 @@ class House(Obstacles):
 	def __init__(self,x=650,y=670,name = 'House'):
 		super().__init__(x,y,name)
 		img = (Image.open("images/house.png"))
-		resized_image= img.resize((200, 405), Image.LANCZOS)
+		resized_image= img.resize((200, 405), Image.Resampling.LANCZOS)
 		self.im1 = resized_image.save(self.dir + "downsize_house.png")
 
 	def get_obstacle(self):
@@ -98,7 +98,7 @@ class Pumpkin(Obstacles):
 	def __init__(self,x=650,y=670,name = 'Pumpkin'):
 		super().__init__(x,y,name)
 		img = (Image.open("images/pumpkin.png"))
-		resized_image= img.resize((100, 100), Image.LANCZOS)
+		resized_image= img.resize((100, 100), Image.Resampling.LANCZOS)
 		self.im1 = resized_image.save(self.dir + "downsize_pumpkin.png")
 		
 

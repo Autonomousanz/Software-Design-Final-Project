@@ -35,7 +35,7 @@ class GameWindow:
             self._window.resizable(width=False,height= False)
             self._canvas = Canvas(self._window, width = 550, height = 700, background = "#10104E")
             img = (Image.open("Background.png"))
-            resized_image= img.resize((550,600), Image.LANCZOS)
+            resized_image= img.resize((550,600), Image.Resampling.LANCZOS)
             self.im1 = resized_image.save("Background.png")
             self.background = PhotoImage(file="Background.png")
             self._backimage = self._canvas.create_image(0,0,anchor= NW, image=self.background)
@@ -74,9 +74,7 @@ class GameWindow:
                 self._window.after(self.framerate,self.witchUp) 
                
             else: self.upcount = 0  
-        else:
-            
-            self.Obstacles.RestartGame()
+
 
     def getCanvas(self):        
         return self._canvas
@@ -90,12 +88,12 @@ class GameWindow:
         pygame.mixer.music.play(loops=30)
         
 
-    def createBtn(self):          
-        self.button = Button(self._window,text ="Start Game",pady=30, bg ="red", fg ="white",command = self.callback)
+    def createBtn(self):   
+        self.title = self._canvas.create_text(100, 250, text="Witchy Witch!", font='Impact 50', fill='#FFD700', anchor=W)       
+        self.button = Button(self._window,text ="Start Game",pady=30, bg ="red",command = self.callback)
         self.button['font'] = font.Font(size = 30)
-        self.button.place(x = 170, y = 350)
-        self.button.pack(fill=X)
-
+      
+        self.start = self._canvas.create_window(275,400,window = self.button)
  
     def run(self):
         "Run application"
@@ -108,7 +106,8 @@ class GameWindow:
             self._window.after(self.framerate,self.Obstacles.ObsMotion)
             self._window.after(self.framerate,self.Obstacles.DetectCollision)
             self._window.bind("<space>", self.witchUp)
-            self.button.pack_forget()
+            self._canvas.delete(self.start)
+            self._canvas.delete(self.title)
         else :
             self._window.after(200,self.run)
         self._window.mainloop()

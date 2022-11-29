@@ -91,17 +91,26 @@ class ObsDynamics():
             scoreFile = open('data.dat', 'w')
             scoreFile.write(str(self.bestScore))
             scoreFile.close()
+
+
+    def restartBtn(self):          
+        self.rbutton = Button(self.gw.getWindow(),text ="Restart Game",pady=30, bg ="red",command=self.RestartGame)
+        self.rbutton['font'] = font.Font(size = 30)
+        self.restart = self.gw.getCanvas().create_window(250,400,window = self.rbutton)
 	
     #method to render end game screen text
     def EndGameScreen(self):
+
         self.gw.getCanvas().delete(self.ghostFig)
         self.gw.getCanvas().delete(self.obsFig)
         self.gw.getCanvas().delete(self.gw._witch)
         
+        self.startgame = False
         self.GameOver = self.gw.getCanvas().create_text(170, 170, text="Game Over", font='Impact 50', fill='#FF0000', anchor=W)
         self.endScore = self.gw.getCanvas().create_text(170, 230, text="Your score: " + str(self.score), font='Impact 40', fill='#FFFF00', anchor=W)
         self.endBest = self.gw.getCanvas().create_text(170, 280, text="Best score: " + str(self.bestScore), font='Impact 40', fill='#FFFF00', anchor=W)
-       
+        
+        self.restartBtn()
         
     
     #if witch collides and if spacebar is pressed again game restarts
@@ -111,13 +120,14 @@ class ObsDynamics():
         self.gw.getCanvas().delete(self.endScore)
         self.gw.getCanvas().delete(self.endBest)
         self.gw.getCanvas().delete(self.ghostFig)
-        self.gw.getCanvas().delete(self.obsFig) 
+        self.gw.getCanvas().delete(self.obsFig)
+        self.gw.getCanvas().delete(self.restart)
+    
+
         self.gw.posY = 200
         self.clonned_ghost.x = 550
         self.score = 0
         self.gw.getCanvas().itemconfig(self.sWin, text=str(self.score))
         self.gw.pause = False
         self.gw._witch = self.gw.getCanvas().create_image(self.gw.posX,self.gw.posY,image=self.gw.witchImg)
-        
-
         self.gw.run()
